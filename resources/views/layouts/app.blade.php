@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Sistema de Mascotas')</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @vite('resources/css/app.css')
 </head>
 <body>
     <header class="header">

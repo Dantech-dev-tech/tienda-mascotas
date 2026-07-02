@@ -7,22 +7,39 @@ use Illuminate\Http\Request;
 
 class PetController extends Controller
 {
-    
-    // Método para obtener datos y paginarlos
-    public function index()
+        
+    /**
+    * Listar y buscar mascotas por especie de forma paginada
+    * @param Request $request
+    * @return \Illuminate\View\View
+    */
+    public function index(Request $request)
     {
-        $pets = Pet::latest()->paginate(5);
+        $query = Pet::query();
+
+        if ($request->has('buscar')) {
+            $query->where('species', 'LIKE', '%' . $request->buscar . '%');
+        }
+
+        $pets = $query->latest()->paginate(5)->appends($request->query());
 
         return view('pets.index', compact('pets'));
     }
 
-    // Método para mostrar el formulario de creación
+    /**
+     * Método para mostrar el formulario de creación
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         return view('pets.create');
     }
 
-    // Método para guardar los datos 
+    /**
+     * Método para guardar los datos
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $request->validate([

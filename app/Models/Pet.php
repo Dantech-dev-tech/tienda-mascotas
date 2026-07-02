@@ -9,7 +9,9 @@ class Pet extends Model
 {
     use HasFactory;
     
-    // Habilitar la asignación masiva para los campos 'name', 'species' y 'age'
+    /**
+     * Habilitar la asignación masiva para los campos 'name', 'species' y 'age'
+     */
     protected $fillable = [
         'name',
         'species',
